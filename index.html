@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Buon Compleanno — an Italian-style birthday celebration for our brilliant doctor">
+  <title>Buon Compleanno — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-page="home">
+  <div class="texture" aria-hidden="true"></div>
+  <div class="festive-field" id="festive-field" aria-hidden="true"></div>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <header class="hero" id="hero">
+    <div class="laurel-divider laurel-divider--top" aria-hidden="true">
+      <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 12 Q50 0 100 12 T200 12 T300 12 T400 12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="12" r="4" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <p class="hero__eyebrow" id="hero-eyebrow">Con amore e ammirazione</p>
+    <h1 class="hero__title">Buon Compleanno</h1>
+    <p class="hero__name" id="recipient-name">Nome</p>
+    <p class="hero__subtitle" id="hero-subtitle">Doctor by day, birthday legend today.</p>
+
+    <div class="hero__icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="cap-icon">
+        <path d="M8 36 L32 24 L56 36 L32 48 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M56 36 L56 44 C56 48 44 52 32 52 C20 52 8 48 8 44 L8 36" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="32" y1="24" x2="32" y2="12" stroke="currentColor" stroke-width="2"/>
+        <circle cx="32" cy="10" r="3" fill="currentColor"/>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <section class="countdown-section reveal" aria-labelledby="countdown-heading">
+      <h2 id="countdown-heading" class="section-title">The big day is coming</h2>
+      <p class="countdown__date" id="countdown-date"></p>
+
+      <div class="countdown" id="countdown" aria-live="polite" aria-atomic="true">
+        <div class="countdown__unit">
+          <span class="countdown__value" id="days">--</span>
+          <span class="countdown__label">Days</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__value" id="hours">--</span>
+          <span class="countdown__label">Hours</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__value" id="minutes">--</span>
+          <span class="countdown__label">Minutes</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__value" id="seconds">--</span>
+          <span class="countdown__label">Seconds</span>
+        </div>
+      </div>
+
+      <p class="countdown__message" id="countdown-message" hidden></p>
+    </section>
+
+    <section class="gift-section reveal" aria-labelledby="gift-heading">
+      <h2 id="gift-heading" class="section-title">A surprise for you</h2>
+      <div class="gift-box" id="gift-box">
+        <div class="gift-box__lid" aria-hidden="true"></div>
+        <div class="gift-box__ribbon-v" aria-hidden="true"></div>
+        <div class="gift-box__ribbon-h" aria-hidden="true"></div>
+        <div class="gift-box__body" aria-hidden="true"></div>
+        <span class="gift-box__sparkle" aria-hidden="true">✨</span>
+      </div>
+      <button type="button" class="btn" id="gift-btn">Open the gift</button>
+      <p class="gift-message" id="gift-message" hidden></p>
+    </section>
+
+    <section class="quick-nav-section" aria-labelledby="explore-heading">
+      <h2 id="explore-heading" class="section-title reveal">Explore the celebration</h2>
+      <div class="quick-nav" id="quick-nav"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

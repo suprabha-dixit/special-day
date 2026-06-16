@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Treats — tap cakes, chocolates, and gifts for birthday surprises">
+  <title>Treats — Dolci</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-page="fun">
+  <div class="texture" aria-hidden="true"></div>
+  <div class="balloon-field" id="balloon-field" aria-hidden="true"></div>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <header class="page-hero">
+    <div class="laurel-divider" aria-hidden="true">
+      <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 12 Q50 0 100 12 T200 12 T300 12 T400 12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="12" r="4" fill="currentColor"/>
+      </svg>
+    </div>
+    <p class="page-hero__eyebrow">Dolci &amp; sorprese</p>
+    <h1 class="page-hero__title">Birthday Treats</h1>
+    <p class="page-hero__subtitle">Tap the cakes, chocolates, and gifts — each one holds a little surprise.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="treats-heading">
+      <h2 id="treats-heading" class="visually-hidden">Interactive treats</h2>
+      <div class="treats-grid" id="treats-grid"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/fun.js"></script>
+</body>
+</html>

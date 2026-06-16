@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Birthday wishes — cheers, jokes, and PhD humour">
+  <title>Wishes — Auguri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-page="wishes">
+  <div class="texture" aria-hidden="true"></div>
+
+  <header class="page-hero">
+    <div class="laurel-divider" aria-hidden="true">
+      <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 12 Q50 0 100 12 T200 12 T300 12 T400 12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="12" r="4" fill="currentColor"/>
+      </svg>
+    </div>
+    <p class="page-hero__eyebrow">Tanti Auguri</p>
+    <h1 class="page-hero__title">Wishes for <span data-recipient>Nome</span></h1>
+    <p class="page-hero__subtitle">Birthday cheers, academic respect, and jokes Reviewer #2 would hate.</p>
+  </header>
+
+  <main>
+    <section class="phd-section reveal" aria-labelledby="phd-heading">
+      <div class="phd-card">
+        <div class="phd-card__border" aria-hidden="true"></div>
+        <div class="phd-card__content">
+          <div class="phd-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="8" width="28" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="16" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="16" y1="22" x2="32" y2="22" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="16" y1="28" x2="26" y2="28" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M24 40 L20 48 L28 48 Z" fill="currentColor" opacity="0.6"/>
+            </svg>
+          </div>
+          <h2 id="phd-heading" class="phd-card__title">The PhD journey</h2>
+          <p class="phd-card__text" id="phd-tribute"></p>
+          <ul class="phd-card__wishes" id="phd-wishes"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wishes-section" aria-labelledby="wishes-heading">
+      <h2 id="wishes-heading" class="section-title reveal">Birthday cheers</h2>
+      <div class="wishes-grid" id="wishes-grid"></div>
+    </section>
+
+    <section class="jokes-section" aria-labelledby="jokes-heading">
+      <h2 id="jokes-heading" class="section-title reveal">PhD survivor humour</h2>
+      <p class="section-intro reveal">Because laughter is the best defence against Reviewer #2.</p>
+      <div class="jokes-grid" id="jokes-grid"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/wishes.js"></script>
+</body>
+</html>
