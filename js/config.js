@@ -4,8 +4,8 @@ const SITE_CONFIG = {
   timezone: "Europe/Rome", // Turin, Italy
 
   birthdayGate: {
-    enabled: true, // set false to preview full site before June 18
-    title: "false Compleanno",
+    enabled: false, // set false to preview full site before June 18
+    title: "Buon Compleanno",
     subtitle: "Something special is on its way…",
     unlockLine: "Tanti Auguri! The celebration is ready.",
     musicOnGate: true,
