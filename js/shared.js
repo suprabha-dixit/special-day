@@ -1,3 +1,95 @@
+function hasTimezoneOffset(iso) {
+  return /(?:Z|[+-]\d{2}:\d{2})$/i.test(iso.trim());
+}
+
+function parseBirthdayInTimezone(iso, timeZone) {
+  const parts = iso.trim().match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+  if (!parts) return null;
+
+  const target = {
+    year: Number(parts[1]),
+    month: Number(parts[2]),
+    day: Number(parts[3]),
+    hour: Number(parts[4] ?? 0),
+    minute: Number(parts[5] ?? 0),
+    second: Number(parts[6] ?? 0),
+  };
+
+  let utc = Date.UTC(
+    target.year,
+    target.month - 1,
+    target.day,
+    target.hour,
+    target.minute,
+    target.second
+  );
+
+  const formatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  for (let i = 0; i < 5; i++) {
+    const read = Object.fromEntries(
+      formatter
+        .formatToParts(new Date(utc))
+        .filter((p) => p.type !== "literal")
+        .map((p) => [p.type, Number(p.value)])
+    );
+
+    const readHour = read.hour === 24 ? 0 : read.hour;
+    const readMs = Date.UTC(read.year, read.month - 1, read.day, readHour, read.minute, read.second);
+    const targetMs = Date.UTC(
+      target.year,
+      target.month - 1,
+      target.day,
+      target.hour,
+      target.minute,
+      target.second
+    );
+    const delta = targetMs - readMs;
+    if (delta === 0) break;
+    utc += delta;
+  }
+
+  const date = new Date(utc);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function parseBirthday() {
+  const iso = SITE_CONFIG.birthdayISO;
+  if (!iso) return null;
+
+  if (hasTimezoneOffset(iso)) {
+    const date = new Date(iso);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  const timeZone = SITE_CONFIG.timezone || "Europe/Rome";
+  return parseBirthdayInTimezone(iso, timeZone);
+}
+
+function isBirthdayUnlocked() {
+  const target = parseBirthday();
+  if (!target) return true;
+  return Date.now() >= target.getTime();
+}
+
+function isEarlyCelebrationActive() {
+  const ec = SITE_CONFIG.earlyCelebration;
+  if (!ec?.enabled) return false;
+  if (isBirthdayUnlocked()) return false;
+  const indiaStart = new Date(ec.birthdayISO);
+  if (Number.isNaN(indiaStart.getTime())) return false;
+  return Date.now() >= indiaStart.getTime();
+}
+
 const NAV_ICONS = {
   home: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9.5z"/></svg>`,
   gallery: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 16l-5.5-5.5L5 20"/></svg>`,
@@ -117,6 +209,11 @@ function showToast(message) {
 
 function initShared() {
   document.body.classList.add("page-enter");
+
+  if (typeof enforceBirthdayGate === "function" && enforceBirthdayGate()) {
+    return;
+  }
+
   injectNav();
   injectFooter();
   applyRecipientName();

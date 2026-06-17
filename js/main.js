@@ -2,13 +2,6 @@ const $ = (sel) => document.querySelector(sel);
 
 let confettiFired = false;
 
-function parseBirthday() {
-  const iso = SITE_CONFIG.birthdayISO;
-  if (!iso) return null;
-  const date = new Date(iso);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
 function formatBirthdayDate(date) {
   return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -25,6 +18,7 @@ function updateCountdown() {
   const countdownEl = $("#countdown");
   const messageEl = $("#countdown-message");
   const dateEl = $("#countdown-date");
+  const headingEl = $("#countdown-heading");
   const target = parseBirthday();
 
   if (!target) {
@@ -44,6 +38,7 @@ function updateCountdown() {
 
   if (diff <= 0) {
     countdownEl.classList.add("countdown--finished");
+    if (headingEl) headingEl.textContent = "The big day is here!";
     $("#days").textContent = "0";
     $("#hours").textContent = "0";
     $("#minutes").textContent = "0";
@@ -71,13 +66,12 @@ function initGiftReveal() {
   if (!btn || !box) return;
 
   btn.addEventListener("click", () => {
-    box.classList.add("gift-box--open");
-    btn.hidden = true;
-    if (message) {
-      message.hidden = false;
-      message.textContent = SITE_CONFIG.giftReveal.hiddenMessage;
-    }
-    fireConfetti($("#confetti-canvas"), 80);
+    openGiftExperience({
+      box,
+      btn,
+      messageEl: message,
+      canvas: $("#confetti-canvas"),
+    });
   });
 }
 
@@ -86,9 +80,14 @@ function initQuickNav() {
   if (!grid) return;
 
   const cards = [
-    { href: "gallery.html", title: "Memories", desc: "Browse our favourite photos", accent: "Ricordi" },
-    { href: "wishes.html", title: "Wishes", desc: "Cheers, jokes & birthday messages", accent: "Auguri" },
-    { href: "fun.html", title: "Treats", desc: "Cakes, chocolates & surprises", accent: "Dolci" },
+    {
+      href: "gallery.html",
+      title: "Memories",
+      desc: `${SITE_CONFIG.recipientName}'s photo album — snapshots and moments picked for you`,
+      accent: "Photos",
+    },
+    { href: "wishes.html", title: "Wishes", desc: "Cheers & birthday messages", accent: "Cheers" },
+    { href: "fun.html", title: "Treats", desc: "Cakes, chocolates & surprises", accent: "Treats" },
   ];
 
   cards.forEach((card, i) => {
@@ -107,9 +106,24 @@ function initQuickNav() {
   observeReveals(grid);
 }
 
+function fireWelcomeConfetti() {
+  if (prefersReducedMotion()) return;
+  try {
+    if (sessionStorage.getItem("home-welcome-confetti") === "1") return;
+    sessionStorage.setItem("home-welcome-confetti", "1");
+  } catch (_) { /* ignore */ }
+
+  const canvas = $("#confetti-canvas");
+  if (!canvas) return;
+  setTimeout(() => fireConfetti(canvas, 80), 400);
+}
+
 function init() {
   initShared();
+  if (document.body.classList.contains("birthday-gate--active")) return;
+
   createFestiveBackground($("#festive-field"));
+  fireWelcomeConfetti();
   initQuickNav();
   initGiftReveal();
   updateCountdown();

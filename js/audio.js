@@ -10,11 +10,11 @@ function createButton() {
   btn = document.createElement("button");
   btn.type = "button";
   btn.className = "music-toggle";
-  btn.setAttribute("aria-label", "Play Italian piano background music");
+  btn.setAttribute("aria-label", "Play birthday background music");
   btn.setAttribute("aria-pressed", "false");
   btn.innerHTML = `
     <span class="music-toggle__icon" aria-hidden="true">♪</span>
-    <span class="music-toggle__label">Italian piano vibes</span>
+    <span class="music-toggle__label">Birthday music</span>
   `;
   document.body.appendChild(btn);
 
@@ -42,7 +42,7 @@ function setMusicPlaying(isPlaying) {
   btn.setAttribute("aria-pressed", isPlaying ? "true" : "false");
   btn.setAttribute(
     "aria-label",
-    isPlaying ? "Pause Italian piano background music" : "Play Italian piano background music"
+    isPlaying ? "Pause birthday background music" : "Play birthday background music"
   );
   btn.classList.toggle("music-toggle--playing", isPlaying);
   localStorage.setItem(STORAGE_KEY, isPlaying ? "true" : "false");
@@ -51,7 +51,7 @@ function setMusicPlaying(isPlaying) {
 function showMusicPrompt() {
   if (musicPrompt) return;
 
-  const message = SITE_CONFIG.musicPromptMessage || "Tap anywhere for Italian piano";
+  const message = SITE_CONFIG.musicPromptMessage || "Tap anywhere for music";
   musicPrompt = document.createElement("div");
   musicPrompt.className = "music-prompt";
   musicPrompt.setAttribute("role", "status");

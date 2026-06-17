@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Memories — photo gallery for our birthday celebration">
   <title>Memories — Gallery</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -14,23 +15,22 @@
 <body data-page="gallery">
   <div class="texture" aria-hidden="true"></div>
 
-  <header class="page-hero">
+  <header class="page-hero" id="gallery-hero">
     <div class="laurel-divider" aria-hidden="true">
       <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 12 Q50 0 100 12 T200 12 T300 12 T400 12" fill="none" stroke="currentColor" stroke-width="1"/>
         <circle cx="200" cy="12" r="4" fill="currentColor"/>
       </svg>
     </div>
-    <p class="page-hero__eyebrow">Ricordi</p>
+    <p class="page-hero__eyebrow">Photo gallery</p>
     <h1 class="page-hero__title">Memories</h1>
-    <p class="page-hero__subtitle">Screenshots and snapshots — tap to enlarge. Add a phrase per photo only if you want one.</p>
+    <p class="page-hero__subtitle">Tap any photo to enlarge.</p>
   </header>
 
   <main>
     <section aria-labelledby="gallery-heading">
       <h2 id="gallery-heading" class="visually-hidden">Photo gallery</h2>
-      <p class="section-intro reveal">Drop JPEG or PNG files into <code>assets/gallery/</code>, then list them in <code>js/config.js</code>. Use <code>phrase</code> only when you want text on the enlarged view.</p>
-      <p class="gallery-empty reveal" id="gallery-empty" hidden>No photos yet — add entries to the gallery array in config.js.</p>
+      <p class="gallery-empty reveal" id="gallery-empty" hidden>Photos coming soon.</p>
       <div class="gallery-grid" id="gallery-grid"></div>
     </section>
   </main>
@@ -40,7 +40,9 @@
   <script src="js/config.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/gate.js"></script>
   <script src="js/shared.js"></script>
+  <script src="js/airplane-banner.js"></script>
   <script src="js/gallery.js"></script>
 </body>
 </html>

@@ -1,87 +1,155 @@
 const SITE_CONFIG = {
-  recipientName: "Nome",
-  birthdayISO: "2026-06-18T00:00:00",
-  timezone: "Europe/Rome",
-  heroEyebrow: "Festa & celebrazione",
+  recipientName: "Suprabha",
+  birthdayISO: "2026-06-18T00:00:00+02:00", // midnight, 18 June — Turin (CEST)
+  timezone: "Europe/Rome", // Turin, Italy
+
+  birthdayGate: {
+    enabled: false, // set false to preview full site before June 18
+    title: "false Compleanno",
+    subtitle: "Something special is on its way…",
+    unlockLine: "Tanti Auguri! The celebration is ready.",
+    musicOnGate: true,
+    quotes: [
+      "Good things come to those who wait…",
+      "Preparati per una sorpresa!",
+      "The countdown has begun.",
+      "A little patience — a big celebration awaits.",
+      "Tra poco… qualcosa di speciale!",
+    ],
+  },
+
+  earlyCelebration: {
+    enabled: true,
+    birthdayISO: "2026-06-17T00:00:00+05:30",
+    gateBanner: "From India with love — we've already started celebrating you!",
+    gateHint: "Your Turin birthday arrives soon. The countdown is for Italy time.",
+    quotes: [
+      "June 18 has begun back home — the party started early!",
+      "India cheers first; Italy joins when the clock strikes in Turin.",
+      "Distance doesn't delay love — only the official confetti.",
+    ],
+  },
+
+  heroEyebrow: "With love & admiration",
   heroSubtitle: "Doctor by day, birthday legend today.",
   musicFile: "assets/audio/italian-piano.mp3",
   musicAutoplayHome: true,
-  musicPromptMessage: "Tap anywhere for Italian piano",
+  musicPromptMessage: "Tap anywhere for music",
+
+  airplaneBanner: {
+    enabled: true,
+    message: "Happy Birthday, {name}!",
+    journeyLabel: "Ind → Italy",
+  },
 
   giftReveal: {
     buttonLabel: "Open the gift",
     hiddenMessage:
       "Happy birthday! May this year bring strong coffee, fewer revision requests, and at least one plot that makes sense. Tanti Auguri!",
+    closeLabel: "Continue celebrating",
+    fireworkSound: "assets/audio/fireworks.mp3",
+    cheerSound: "assets/audio/cheer.mp3",
+  },
+
+  wishBalloons: {
+    enabled: true,
+    popPhrases: ["Cheers!", "Happy birthday!", "You rock!", "Celebrate big!", "For you!"],
   },
 
   phdTribute:
     "Years of research, late nights, conferences, and breakthroughs — respect to the grind that got you here.",
 
   phdWishes: [
-    "May your thesis defend itself as well as you defend your arguments.",
+    "May your hard work open doors, your dedication inspire others, and your next chapter be your best yet.",
     "May every challenge turn into a publication-worthy story.",
     "May your next academic year be productive, funded, and surprisingly fun.",
   ],
 
   wishes: [
     {
-      accent: "Tanti auguri!",
+      accent: "Cheers!",
       text: "Happy birthday — here's to cake, chaos, and a well-deserved break from citations.",
     },
     {
-      accent: "Salute!",
+      accent: "To you!",
       text: "Wishing you a year of wins, good espresso, and zero surprise deadline extensions.",
     },
     {
-      accent: "Per il dottore",
+      accent: "For our doctor",
       text: "Brains, hustle, and legendary snack breaks — that's the full package.",
     },
     {
-      accent: "Brindiamo a te",
-      text: "We raise a glass to you — scholar, troublemaker (the fun kind), and birthday VIP.",
+      accent: "Raise a glass",
+      text: "We raise a glass to you — scholar, loyal friend, and the person who makes every room brighter.",
+    },
+    {
+      accent: "Health & happiness",
+      text: "May this year bring you good health, peaceful days, and the simple joys that make life feel full — rest, laughter, and time with the people who matter most.",
     },
   ],
 
-  phdJokes: [
-    {
-      title: "Citation needed: your awesomeness",
-      text: "Another year older, another bibliography longer. At this point your reference list has its own reference list.",
-    },
-    {
-      title: "PhD survival tip",
-      text: "Coffee is not a food group — but on your birthday, we officially declare it one.",
-    },
-    {
-      title: "Reviewer #2 would approve",
-      text: "You survived another year of 'minor revisions.' That alone deserves cake. And chocolate. And balloons.",
-    },
-    {
-      title: "Statistically significant",
-      text: "p < 0.05 that today will be amazing. p < 0.001 that you deserve every bit of it.",
-    },
-    {
-      title: "Abstract of your year",
-      text: "Background: Genius. Methods: Hard work + espresso. Results: One incredible human. Conclusion: Happy birthday!",
-    },
-    {
-      title: "Office hours",
-      text: "Today's only assignment: accept compliments, eat treats, and do absolutely zero grading.",
-    },
-  ],
+  treatReveal: {
+    closeLabel: "Got it!",
+  },
 
   funSurprises: [
-    { type: "cake", label: "Birthday Cake", message: "Slice of happiness unlocked! Calories don't count on birthdays — it's peer-reviewed." },
-    { type: "chocolate", label: "Italian Chocolate", message: "Dark, rich, and irresistible — just like your research papers (but sweeter)." },
-    { type: "chocolate", label: "Truffle Box", message: "You found the truffle! Fun fact: truffles are rare. So are people like you." },
-    { type: "cake", label: "Tiramisu", message: "Layers of coffee, cream, and joy — the dessert equivalent of your multitasking skills." },
-    { type: "gift", label: "Surprise Gift", message: "Inside: zero deadlines, maximum snacks, and one very proud friend group." },
-    { type: "balloon", label: "Floating Joy", message: "Pop! Just kidding — this balloon is full of good vibes and bad puns." },
+    { type: "cake", label: "Birthday Cake", accent: "Enjoy!", message: "Slice of happiness unlocked! Calories don't count on birthdays — it's peer-reviewed." },
+    {
+      type: "chocolate",
+      label: "Chocolate Bar",
+      accent: "Sweet!",
+      message: "Something special is wrapped inside — verify to unwrap your surprise.",
+      voucher: {
+        code: "XXXX-XXXXXX-XXXX",
+        verifyDelayMs: 1800,
+        intro: "Verify to unwrap your birthday Sweet Surprise.",
+        authLabel: "Enter your mobile number",
+        authPlaceholder: "......",
+        authValue: "7756016965",
+        authError: "Reviewer #2 rejected that — minor revision required. Try again!",
+        verifyButton: "Verify & unlock",
+        verifyingText: "Running peer review on your digits… hold tight!",
+        revealTitle: "Take your healthy-sweets steps!",
+        revealMessage: "You cracked the chocolate bar. This code is your passport to smarter treats — dark chocolate, dates, nuts, and whatever counts as 'healthy' in your lab.",
+        copyLabel: "Copy gift card code",
+        copiedLabel: "Copied!",
+        redeemTitle: "Your sweet redemption path",
+        redeemSteps: [
+          { label: "Copy", text: "Grab the code above — your golden ticket, no peer review required." },
+          { label: "Open", text: "Amazon app → Gift Cards → Add a gift card. Paste and tap Apply." },
+          { label: "Treat", text: "Checkout with guilt-free sweets. PhD-approved snacking only from here." },
+        ],
+        redeemHelp: "Keep this code private. If Amazon says no, check for typos — or blame Reviewer #2.",
+      },
+    },
+    {
+      type: "gift",
+      label: "Surprise Gift",
+      accent: "Surprise!",
+      message: "Inside: zero deadlines, maximum snacks, and one very proud friend group.",
+      puzzles: {
+        intro: "Unwrap your gift — tap each piece, then tap where it belongs!",
+        gridSize: 2,
+        nextPuzzleLabel: "Next surprise",
+        celebrationMessages: [
+          "Happy birthday, Suprabha!",
+          "Another piece of the puzzle — just like your PhD journey.",
+          "You're crushing it — cake-level achievements only from here.",
+          "Tanti auguri! Reviewer #2 has no notes on this performance.",
+        ],
+        finaleCelebration: {
+          title: "Happy birthday, Suprabha!",
+          message: "Here's to everything ahead — success, joy, and a future as bright as you are.",
+        },
+        items: [
+          //{ image: "assets/gallery/01.jpg", alt: "Celebration night" },
+          { image: "assets/gallery/03.jpg", alt: "Smiling portrait" },
+          { image: "assets/gallery/06.jpg", alt: "Cheers" },
+        ],
+      },
+    },
   ],
 
-  // Gallery: drop JPEG/PNG files in assets/gallery/ and list them here.
-  // - alt: required (accessibility)
-  // - caption: optional — short label on the thumbnail grid
-  // - phrase: optional — shown only when the photo is enlarged; omit for photo-only view
   gallery: [
     {
       src: "assets/gallery/01.jpg",

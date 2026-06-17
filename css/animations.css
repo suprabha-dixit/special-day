@@ -49,7 +49,7 @@
     transform: scale(0.4);
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.75;
     transform: scale(1);
   }
 }
@@ -161,6 +161,277 @@
   50% { transform: translateX(-50%) scale(1.2); }
 }
 
+@keyframes bouquetRise {
+  from {
+    opacity: 0;
+    transform: translateY(80px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bouquetBloom {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes giftRevealFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes treatVisualRise {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes treatCandleFlicker {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08) translateY(-2px); opacity: 0.85; }
+}
+
+@keyframes treatChocolateSplitLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-18px) rotate(-4deg); }
+}
+
+@keyframes treatChocolateSplitRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(18px) rotate(4deg); }
+}
+
+@keyframes treatBalloonFloat {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes treatTruffleReveal {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes treatSparkleIn {
+  from { opacity: 0; transform: translateX(-50%) scale(0.5); }
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes voucherSpinner {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes crackerSplitLeft {
+  from { transform: translateX(0) rotate(0deg); }
+  to { transform: translateX(-28px) rotate(-12deg); }
+}
+
+@keyframes crackerSplitRight {
+  from { transform: translateX(0) rotate(0deg); }
+  to { transform: translateX(28px) rotate(12deg); }
+}
+
+@keyframes crackerSparkBurst {
+  0% { opacity: 0; transform: scale(0.2); }
+  40% { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 0.85; transform: scale(1); }
+}
+
+@keyframes voucherCodeReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes puzzleMsgIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes puzzleShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.photo-puzzle__shake {
+  animation: puzzleShake 0.35s ease;
+}
+
+.treat-candle-flame {
+  transform-origin: center bottom;
+  animation: treatCandleFlicker 0.8s ease-in-out infinite;
+}
+
+.treat-visual--chocolate-open .treat-chocolate-left {
+  animation: treatChocolateSplitLeft 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s forwards;
+}
+
+.treat-visual--chocolate-open .treat-chocolate-right {
+  animation: treatChocolateSplitRight 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s forwards;
+}
+
+.treat-float-balloon {
+  animation: treatBalloonFloat 1.2s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: var(--float-delay, 0s);
+}
+
+@keyframes planeFly {
+  0% { transform: translateX(-110vw) translateY(0) rotate(-1.5deg); }
+  12% { transform: translateX(-65vw) translateY(-8px) rotate(1deg); }
+  30% { transform: translateX(-30vw) translateY(5px) rotate(-0.8deg); }
+  50% { transform: translateX(5vw) translateY(-5px) rotate(1.2deg); }
+  70% { transform: translateX(40vw) translateY(4px) rotate(-1deg); }
+  88% { transform: translateX(75vw) translateY(-3px) rotate(0.8deg); }
+  100% { transform: translateX(110vw) translateY(0) rotate(-0.5deg); }
+}
+
+@keyframes propellerSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cloudDrift {
+  0%, 100% { transform: translateX(0); opacity: 0.28; }
+  50% { transform: translateX(5px); opacity: 0.42; }
+}
+
+@keyframes bannerWave {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  50% { transform: rotate(1.2deg) translateY(2px); }
+}
+
+@keyframes gateSparkleDrift {
+  0%, 100% { transform: translate(0, 0) scale(0.8); opacity: 0.35; }
+  50% { transform: translate(12px, -18px) scale(1.2); opacity: 0.85; }
+}
+
+@keyframes gateBalloonDrift {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.55; }
+  50% { transform: translateY(-55vh) translateX(16px); }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-110vh) translateX(-8px); opacity: 0; }
+}
+
+@keyframes gateTitlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes gateUnlockGlow {
+  0% { box-shadow: var(--shadow-hover); }
+  50% { box-shadow: 0 0 32px rgba(201, 162, 39, 0.55); }
+  100% { box-shadow: var(--shadow-hover); }
+}
+
+@keyframes gateCardEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes gateTitleShimmer {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 14px rgba(201, 162, 39, 0.4); }
+}
+
+@keyframes gateBannerSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroCapFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes heroLaurelFade {
+  from { opacity: 0; transform: scaleX(0.85); }
+  to { opacity: 0.7; transform: scaleX(1); }
+}
+
+@keyframes countdownUnitPop {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes giftBoxIdle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.01); }
+}
+
+@keyframes wishBalloonDrift {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 0.85; }
+  50% { transform: translate3d(var(--balloon-sway, 12px), -45vh, 0); }
+  92% { opacity: 0.75; }
+  100% { transform: translate3d(calc(var(--balloon-sway, 12px) * -0.5), -90vh, 0); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .festive-item,
   .festive-sparkle,
@@ -181,6 +452,85 @@
   body.page-enter,
   .lightbox {
     animation: none;
+  }
+
+  .gift-reveal__bouquet,
+  .bouquet-rose,
+  .bouquet-ribbon,
+  .gift-reveal__message,
+  .gift-reveal__close,
+  .gift-reveal__backdrop {
+    animation: none;
+  }
+
+  .treat-reveal__visual,
+  .treat-reveal__accent,
+  .treat-reveal__title,
+  .treat-reveal__message,
+  .treat-reveal__close,
+  .treat-reveal__backdrop,
+  .treat-candle-flame,
+  .treat-chocolate-left,
+  .treat-chocolate-right,
+  .treat-float-balloon,
+  .treat-truffle,
+  .treat-mini-gift__sparkle,
+  .voucher-cracker__half--left,
+  .voucher-cracker__half--right,
+  .voucher-cracker__spark,
+  .voucher-code,
+  .voucher-form__spinner-icon {
+    animation: none;
+  }
+
+  .photo-puzzle__piece {
+    transition: none;
+  }
+
+  .photo-puzzle__shake {
+    animation: none;
+  }
+
+  .puzzle-celebration-msg {
+    animation: none;
+  }
+
+  .treat::after {
+    display: none;
+  }
+
+  .airplane-banner,
+  .wish-balloon {
+    animation: none;
+    display: none;
+  }
+
+  .airplane-banner__propeller,
+  .airplane-banner__cloud {
+    animation: none;
+  }
+
+  .airplane-banner__ribbon {
+    animation: none;
+  }
+
+  .birthday-gate__sparkle,
+  .birthday-gate__balloon,
+  .birthday-gate__title--pulse,
+  .birthday-gate--unlocking .birthday-gate__card,
+  .birthday-gate__card,
+  .birthday-gate__title,
+  .birthday-gate__india-banner,
+  .hero-enter,
+  .hero-laurel,
+  .hero__icon .cap-icon,
+  .countdown__unit--enter,
+  .gift-box:not(.gift-box--open) {
+    animation: none;
+  }
+
+  .birthday-gate__balloon {
+    display: none;
   }
 }
 

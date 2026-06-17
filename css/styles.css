@@ -26,6 +26,10 @@
   padding: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -53,6 +57,10 @@ body.lightbox-open {
   overflow: hidden;
 }
 
+body.gift-reveal-open {
+  overflow: hidden;
+}
+
 .texture {
   position: fixed;
   inset: 0;
@@ -73,12 +81,26 @@ body.lightbox-open {
   z-index: 1000;
 }
 
-.balloon-field {
+.balloon-field,
+.wish-balloon-field {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
   overflow: hidden;
+}
+
+.balloon-field {
+  pointer-events: none;
+}
+
+.wish-balloon-field {
+  pointer-events: none;
+  height: 45vh;
+  bottom: auto;
+}
+
+.wish-balloon-field .wish-balloon {
+  pointer-events: auto;
 }
 
 /* Navigation — mobile bottom bar */
@@ -146,6 +168,10 @@ body.lightbox-open {
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: transform var(--transition), box-shadow var(--transition);
+}
+
+body.birthday-gate--active .music-toggle{
+	z-index: 2100;
 }
 
 .music-toggle:hover {
@@ -226,6 +252,10 @@ body.lightbox-open {
     height: 44px;
     justify-content: center;
   }
+
+  .photo-puzzle {
+    width: min(100%, 280px);
+  }
 }
 
 /* Hero */
@@ -296,6 +326,26 @@ body.lightbox-open {
 
 .hero__icon { color: var(--gold); }
 .cap-icon { width: 56px; height: 56px; opacity: 0.85; }
+
+.hero-enter {
+  opacity: 0;
+  animation: heroEnter 0.65s ease-out both;
+  animation-delay: calc(0.35s + var(--enter-i, 0) * 0.12s);
+}
+
+.hero-laurel {
+  animation: heroLaurelFade 0.8s ease-out 0.15s both;
+}
+
+.hero__icon .cap-icon {
+  animation: heroCapFloat 3s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.countdown--enter .countdown__unit--enter {
+  animation: countdownUnitPop 0.5s ease-out both;
+  animation-delay: calc(0.6s + var(--enter-i, 0) * 0.1s);
+}
 
 /* Main content */
 main {
@@ -391,6 +441,7 @@ main {
   width: 120px;
   height: 100px;
   margin: 0 auto 1.5rem;
+  animation: giftBoxIdle 4s ease-in-out infinite;
 }
 
 .gift-box__lid {
@@ -438,6 +489,10 @@ main {
 
 .gift-box--open .gift-box__lid {
   transform: translateY(-40px) rotate(-25deg);
+}
+
+.gift-box--open {
+  animation: none;
 }
 
 .gift-box__sparkle {
@@ -488,6 +543,74 @@ main {
   font-style: italic;
   color: var(--wine);
   line-height: 1.5;
+}
+
+/* Gift reveal modal */
+.gift-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.gift-reveal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 28, 36, 0.72);
+  backdrop-filter: blur(6px);
+  animation: giftRevealFadeIn 0.5s ease;
+}
+
+.gift-reveal__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.gift-reveal__bouquet {
+  width: min(280px, 75vw);
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.35));
+  animation: bouquetRise 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+.gift-reveal__bouquet-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gift-reveal__message {
+  margin: 0;
+  max-width: 36ch;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--cream);
+  line-height: 1.55;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: giftRevealFadeIn 0.6s ease 0.4s both;
+}
+
+.gift-reveal__close {
+  animation: giftRevealFadeIn 0.5s ease 0.7s both;
+}
+
+.bouquet-rose {
+  transform-origin: center;
+  animation: bouquetBloom 0.8s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: calc(0.3s + var(--bloom-delay, 0s));
+}
+
+.bouquet-ribbon {
+  animation: giftRevealFadeIn 0.5s ease 0.8s both;
 }
 
 /* Quick nav cards */
@@ -594,16 +717,19 @@ main {
   top: 0.35em;
 }
 
-/* Wishes & jokes grids */
-.wishes-grid,
-.jokes-grid {
+/* Wishes grid */
+.wishes-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
-.wish-card,
-.joke-card {
+.page-hero--wishes {
+  position: relative;
+  z-index: 1;
+}
+
+.wish-card {
   background: var(--card-bg);
   border: 1px solid rgba(92, 107, 74, 0.2);
   border-radius: var(--radius);
@@ -612,8 +738,7 @@ main {
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.wish-card:hover,
-.joke-card:hover {
+.wish-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
@@ -628,16 +753,179 @@ main {
 
 .wish-card__text { color: var(--text-muted); }
 
-.joke-card__title {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  color: var(--wine);
-  margin-bottom: 0.5rem;
+/* Interactive wish balloons */
+.wish-balloon {
+  position: absolute;
+  left: var(--balloon-x, 50%);
+  bottom: -60px;
+  width: 44px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  animation: wishBalloonDrift var(--balloon-duration, 18s) var(--balloon-delay, 0s) ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.joke-card__text {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.wish-balloon__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wish-balloon__motif {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.wish-balloon--popped {
+  animation: none;
+  opacity: 0;
+  transform: scale(1.4);
+  pointer-events: none;
+}
+
+/* Airplane banner (Memories / gallery page) */
+body[data-page="gallery"] #gallery-hero {
+  padding-top: 5.75rem;
+}
+
+body[data-page="gallery"] .airplane-banner {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.airplane-banner__flyer {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  white-space: nowrap;
+  animation: planeFly 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+.airplane-banner__plane-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.airplane-banner__plane-wrap .airplane-banner__scene {
+  width: 140px;
+  height: auto;
+  flex-shrink: 0;
+  transform: scaleX(-1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.airplane-banner__journey {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(107, 45, 60, 0.88);
+  border: 1px solid var(--gold-light);
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.airplane-banner__propeller {
+  animation: propellerSpin 0.1s linear infinite;
+  transform-origin: 18px 50px;
+  transform-box: fill-box;
+}
+
+.airplane-banner__cloud {
+  animation: cloudDrift 5s ease-in-out infinite;
+}
+
+.airplane-banner__cloud--2 {
+  animation-delay: -1.6s;
+}
+
+.airplane-banner__ribbon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, #d4b84a 100%);
+  border: 2px solid var(--terracotta);
+  border-radius: 6px;
+  padding: 0.45rem 1.35rem 0.45rem 1rem;
+  box-shadow: 0 4px 12px rgba(107, 45, 60, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: bannerWave 3.5s ease-in-out infinite;
+  transform-origin: right center;
+}
+
+.airplane-banner__ribbon-wave {
+  position: absolute;
+  right: -14px;
+  left: auto;
+  top: 50%;
+  width: 18px;
+  height: 10px;
+  border: 2px solid var(--terracotta);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  transform: translateY(-50%);
+  opacity: 0.75;
+}
+
+.airplane-banner__text {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--wine);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+@media (min-width: 768px) {
+  body[data-page="gallery"] .airplane-banner {
+    height: 96px;
+  }
+
+  body[data-page="gallery"] #gallery-hero {
+    padding-top: 6.25rem;
+  }
+
+  .airplane-banner__plane-wrap .airplane-banner__scene {
+    width: 175px;
+  }
+
+  .airplane-banner__journey {
+    font-size: 0.62rem;
+  }
+
+  .airplane-banner__text {
+    font-size: 1.05rem;
+  }
 }
 
 /* Gallery */
@@ -785,35 +1073,938 @@ main {
   padding-bottom: 1rem;
 }
 
+@media (max-width: 767px) {
+  .treats-grid .treat:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc(50% - 0.5rem);
+    justify-self: center;
+  }
+}
+
 .treat {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.25rem 0.75rem;
+  padding: 1.25rem 0.75rem 1rem;
   border: 1px solid rgba(201, 162, 39, 0.3);
   border-radius: var(--radius);
   background: var(--card-bg);
   box-shadow: var(--shadow);
   cursor: pointer;
-  transition: transform var(--transition);
-  min-height: 120px;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  min-height: 130px;
+  overflow: hidden;
 }
 
-.treat:hover { transform: scale(1.04); }
+.treat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gold);
+}
+
+.treat--cake::before { background: var(--terracotta); }
+.treat--chocolate::before { background: var(--wine); }
+.treat--gift::before { background: var(--gold); }
+.treat--balloon::before { background: var(--olive); }
+
+.treat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(232, 212, 139, 0.25) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.treat:hover::after {
+  transform: translateX(120%);
+}
+
+.treat:hover {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-hover);
+}
+
+.treat--opened {
+  opacity: 0.82;
+}
+
+.treat--opened:hover {
+  transform: none;
+}
+
+.treat__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.treat__badge::after {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--wine);
+}
+
+.treat--opened .treat__badge {
+  opacity: 1;
+  transform: scale(1);
+}
 
 .treat:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
-.treat__svg { width: 56px; height: 56px; }
+.treat__svg { width: 64px; height: 64px; }
 
 .treat__label {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--wine);
   text-align: center;
+}
+
+body.treat-reveal-open {
+  overflow: hidden;
+}
+
+/* Treat reveal modal */
+.treat-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: max(1rem, env(safe-area-inset-top, 0px)) 1rem
+    max(1rem, env(safe-area-inset-bottom, 0px));
+}
+
+.treat-reveal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 28, 36, 0.72);
+  backdrop-filter: blur(6px);
+  animation: giftRevealFadeIn 0.4s ease;
+  cursor: pointer;
+}
+
+.treat-reveal__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.treat-reveal__visual {
+  width: min(200px, 55vw);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: treatVisualRise 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+.treat-visual {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+}
+
+.treat-reveal__accent {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+  animation: giftRevealFadeIn 0.5s ease 0.3s both;
+}
+
+.treat-reveal__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--cream);
+  animation: giftRevealFadeIn 0.5s ease 0.4s both;
+}
+
+.treat-reveal__message {
+  margin: 0;
+  max-width: 32ch;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(250, 247, 242, 0.92);
+  line-height: 1.5;
+  animation: giftRevealFadeIn 0.5s ease 0.5s both;
+}
+
+.treat-reveal__close {
+  margin-top: 0.5rem;
+  animation: giftRevealFadeIn 0.5s ease 0.65s both;
+}
+
+/* Voucher unlock (Chocolate Bar) */
+.treat-reveal--voucher .treat-reveal__content {
+  max-width: 420px;
+}
+
+.treat-reveal__content--voucher {
+  gap: 1rem;
+}
+
+.voucher-auth,
+.voucher-reveal__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.voucher-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0.25rem;
+}
+
+.voucher-form__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(250, 247, 242, 0.9);
+  text-align: left;
+}
+
+.voucher-form__input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  border-radius: var(--radius);
+  background: rgba(250, 247, 242, 0.08);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.voucher-form__input::placeholder {
+  color: rgba(250, 247, 242, 0.45);
+}
+
+.voucher-form__input:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+}
+
+.voucher-form__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #ffb4b4;
+  text-align: left;
+}
+
+.voucher-form__submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.voucher-form__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1rem 0.5rem;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+}
+
+.voucher-form__spinner-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(201, 162, 39, 0.35);
+  border-top-color: var(--gold-light);
+  border-radius: 50%;
+  animation: voucherSpinner 0.8s linear infinite;
+}
+
+.voucher-code-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.voucher-code {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border: 2px dashed var(--gold-light);
+  border-radius: var(--radius);
+  background: rgba(201, 162, 39, 0.12);
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  animation: voucherCodeReveal 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) 0.45s both;
+}
+
+.voucher-copy {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.voucher-redeem {
+  width: 100%;
+  max-width: 340px;
+  text-align: left;
+  animation: giftRevealFadeIn 0.5s ease 0.55s both;
+}
+
+.voucher-reveal__message {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.45;
+  text-align: center;
+  animation: giftRevealFadeIn 0.5s ease 0.35s both;
+}
+
+.voucher-redeem__title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  text-align: center;
+}
+
+.voucher-sweet-steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 0.65rem;
+  padding-left: 0.35rem;
+}
+
+.voucher-sweet-steps::before {
+  content: "";
+  position: absolute;
+  left: 1.35rem;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold-light), var(--terracotta));
+  opacity: 0.45;
+  border-radius: 1px;
+}
+
+.voucher-sweet-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  animation: giftRevealFadeIn 0.45s ease calc(0.5s + var(--step-i, 0) * 0.1s) both;
+}
+
+.voucher-sweet-step__badge {
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(107, 45, 60, 0.92);
+  border: 1px solid var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.voucher-sweet-step__text {
+  margin: 0.15rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(250, 247, 242, 0.9);
+  line-height: 1.45;
+}
+
+.voucher-redeem__help {
+  margin: 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: rgba(250, 247, 242, 0.65);
+  line-height: 1.4;
+}
+
+.voucher-cracker {
+  position: relative;
+  width: 140px;
+  height: 72px;
+  margin-bottom: 0.25rem;
+}
+
+.voucher-cracker__half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.voucher-cracker__half--left {
+  left: 0;
+  transform-origin: right center;
+}
+
+.voucher-cracker__half--right {
+  right: 0;
+  transform-origin: left center;
+}
+
+.voucher-cracker__body {
+  width: 52px;
+  height: 44px;
+  border-radius: 6px 6px 4px 4px;
+  background: linear-gradient(135deg, var(--terracotta), var(--wine));
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.voucher-cracker__frill {
+  width: 0;
+  height: 0;
+  margin-top: 2px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 18px solid var(--gold);
+}
+
+.voucher-cracker__half--left .voucher-cracker__frill {
+  border-top-color: var(--gold-light);
+}
+
+.voucher-cracker__spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow:
+    0 0 12px 4px rgba(201, 162, 39, 0.6),
+    -24px -8px 0 -4px rgba(255, 215, 100, 0.8),
+    24px -8px 0 -4px rgba(255, 215, 100, 0.8),
+    0 -22px 0 -5px rgba(255, 180, 80, 0.7);
+  opacity: 0;
+  z-index: 2;
+}
+
+.voucher-cracker--burst .voucher-cracker__half--left {
+  animation: crackerSplitLeft 0.65s cubic-bezier(0.34, 1.4, 0.64, 1) 0.1s forwards;
+}
+
+.voucher-cracker--burst .voucher-cracker__half--right {
+  animation: crackerSplitRight 0.65s cubic-bezier(0.34, 1.4, 0.64, 1) 0.1s forwards;
+}
+
+.voucher-cracker--burst .voucher-cracker__spark {
+  animation: crackerSparkBurst 0.7s ease 0.15s forwards;
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(250, 247, 242, 0.25);
+  color: rgba(250, 247, 242, 0.85);
+}
+
+.btn--ghost:hover {
+  background: rgba(250, 247, 242, 0.08);
+}
+
+.btn--secondary {
+  background: rgba(250, 247, 242, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: var(--cream);
+}
+
+.btn--secondary:hover {
+  background: rgba(201, 162, 39, 0.2);
+}
+
+/* Gift photo puzzles (tap-to-place) */
+.treat-reveal--puzzle .treat-reveal__content {
+  max-width: 420px;
+}
+
+.treat-reveal__content--puzzle {
+  gap: 0.75rem;
+  margin: auto 0;
+}
+
+.puzzle-progress {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+}
+
+.puzzle-stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.photo-puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  width: min(100%, 320px);
+}
+
+.photo-puzzle__hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(250, 247, 242, 0.75);
+  text-align: center;
+}
+
+.photo-puzzle__board {
+  display: grid;
+  grid-template-columns: repeat(var(--puzzle-n, 2), 1fr);
+  grid-template-rows: repeat(var(--puzzle-n, 2), 1fr);
+  gap: 1px;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 2px;
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.photo-puzzle__board--complete {
+  display: block;
+  gap: 0;
+  padding: 0;
+}
+
+.photo-puzzle__slot {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.photo-puzzle__slot--empty {
+  border: 1px dashed rgba(201, 162, 39, 0.35);
+  background: rgba(250, 247, 242, 0.06);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.photo-puzzle__slot--empty:hover {
+  border-color: var(--gold-light);
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.photo-puzzle__slot--filled {
+  padding: 0;
+  cursor: default;
+}
+
+.photo-puzzle__tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 4.5rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.photo-puzzle__piece {
+  width: 4.25rem;
+  height: 4.25rem;
+  padding: 0;
+  border: 1px solid rgba(250, 247, 242, 0.2);
+  border-radius: 6px;
+  background-color: var(--wine);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.photo-puzzle__slot--filled .photo-puzzle__piece {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.photo-puzzle__piece:hover {
+  filter: brightness(1.06);
+}
+
+.photo-puzzle__piece--selected {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.35);
+  transform: scale(1.04);
+}
+
+.photo-puzzle--solved .photo-puzzle__board {
+  box-shadow: 0 0 0 2px var(--gold-light), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.photo-puzzle__complete {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.photo-puzzle__complete img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-puzzle__fallback {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: rgba(250, 247, 242, 0.65);
+  text-align: center;
+  max-width: 28ch;
+}
+
+.puzzle-between,
+.puzzle-finale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.puzzle-finale {
+  max-width: 36rem;
+}
+
+.puzzle-celebration-msg {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  background: rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.45;
+  text-align: center;
+  animation: puzzleMsgIn 0.45s ease both;
+}
+
+.puzzle-finale__message {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  background: rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.45;
+  text-align: center;
+  animation: puzzleMsgIn 0.45s ease both;
+}
+
+.puzzle-skip-close {
+  margin-top: 0.25rem;
+}
+
+/* Mini gift in treat reveal */
+.treat-mini-gift {
+  position: relative;
+  width: 100px;
+  height: 90px;
+}
+
+.treat-mini-gift__lid {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  width: 84px;
+  height: 24px;
+  background: var(--terracotta);
+  border-radius: 4px 4px 0 0;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.treat-mini-gift__body {
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  width: 84px;
+  height: 60px;
+  background: var(--gold);
+  border-radius: 0 0 4px 4px;
+}
+
+.treat-mini-gift__ribbon-v,
+.treat-mini-gift__ribbon-h {
+  position: absolute;
+  background: var(--gold-light);
+  z-index: 3;
+}
+
+.treat-mini-gift__ribbon-v {
+  width: 10px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.treat-mini-gift__ribbon-h {
+  width: 100%;
+  height: 10px;
+  top: 24px;
+}
+
+.treat-mini-gift--open .treat-mini-gift__lid {
+  transform: translateY(-30px) rotate(-20deg);
+}
+
+.treat-mini-gift__sparkle {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  color: var(--gold-light);
+  opacity: 0;
+  animation: treatSparkleIn 0.5s ease 0.4s forwards;
+}
+
+.treat-truffle {
+  animation: treatTruffleReveal 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) 0.3s both;
+}
+
+/* Birthday gate */
+body.birthday-gate--active > header,
+body.birthday-gate--active > main,
+body.birthday-gate--active > .site-nav,
+body.birthday-gate--active > .footer,
+body.birthday-gate--active > #site-footer,
+body.birthday-gate--active > .festive-field,
+body.birthday-gate--active > .wish-balloon-field,
+body.birthday-gate--active > #balloon-field,
+body.birthday-gate--active > #confetti-canvas,
+body.birthday-gate--active > .airplane-banner {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.birthday-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  padding-top: calc(1.5rem + env(safe-area-inset-top, 0));
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0));
+}
+
+.birthday-gate__decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.birthday-gate__sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 8px var(--gold);
+  animation: gateSparkleDrift 8s ease-in-out infinite;
+  animation-delay: calc(var(--sparkle-i, 0) * -1.3s);
+  left: calc(10% + var(--sparkle-i, 0) * 14%);
+  top: calc(20% + var(--sparkle-i, 0) * 8%);
+}
+
+.birthday-gate__balloon {
+  position: absolute;
+  bottom: -40px;
+  width: 28px;
+  height: 36px;
+  border-radius: 50% 50 45% 45% / 40% 40% 60% 60%;
+  background: var(--balloon-color, var(--terracotta));
+  opacity: 0.55;
+  animation: gateBalloonDrift 14s ease-in-out infinite;
+  animation-delay: calc(var(--balloon-i, 0) * -4.5s);
+  left: calc(15% + var(--balloon-i, 0) * 28%);
+}
+
+.birthday-gate__balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  width: 1px;
+  height: 14px;
+  background: rgba(92, 107, 74, 0.35);
+  transform: translateX(-50%);
+}
+
+.birthday-gate__card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: rgba(250, 246, 238, 0.94);
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hover);
+  animation: gateCardEnter 0.6s ease-out both;
+}
+
+.birthday-gate--india-started .birthday-gate__card {
+  border-color: rgba(201, 162, 39, 0.65);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.22), var(--shadow-hover);
+}
+
+.birthday-gate__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  color: var(--wine);
+  margin-bottom: 0.5rem;
+  animation: gateTitleShimmer 4s ease-in-out infinite;
+}
+
+.birthday-gate__india-banner {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, rgba(196, 92, 62, 0.12), rgba(201, 162, 39, 0.15));
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  border-radius: calc(var(--radius) - 2px);
+  animation: gateBannerSlide 0.5s ease-out 0.35s both;
+}
+
+.birthday-gate__india-banner-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  line-height: 1.35;
+}
+
+.birthday-gate__india-banner-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.birthday-gate__title--pulse {
+  animation: gateTitlePulse 1s ease-in-out infinite;
+}
+
+.birthday-gate__subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.birthday-gate__countdown {
+  margin-bottom: 1.25rem;
+}
+
+.birthday-gate__quote {
+  margin: 0;
+  padding: 0 0.5rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--olive);
+  min-height: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.birthday-gate__quote--visible {
+  opacity: 1;
+}
+
+.birthday-gate--unlocking .birthday-gate__card {
+  animation: gateUnlockGlow 1.2s ease forwards;
 }
 
 /* Toast */
@@ -930,8 +2121,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .wishes-grid,
-  .jokes-grid {
+  .wishes-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -959,9 +2149,5 @@ main {
   .wishes-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
-  }
-
-  .jokes-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }

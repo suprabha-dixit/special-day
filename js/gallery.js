@@ -127,6 +127,7 @@ function openLightbox(photo, index) {
 
 function init() {
   initShared();
+  if (document.body.classList.contains("birthday-gate--active")) return;
   renderGallery();
 }
 

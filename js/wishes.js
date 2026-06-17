@@ -28,29 +28,29 @@ function renderPhdSection() {
   });
 }
 
-function renderJokes() {
-  const grid = document.getElementById("jokes-grid");
-  if (!grid) return;
-
-  SITE_CONFIG.phdJokes.forEach((joke, i) => {
-    const card = document.createElement("article");
-    card.className = "joke-card reveal";
-    card.style.setProperty("--stagger", i);
-    card.innerHTML = `
-      <h3 class="joke-card__title">${joke.title}</h3>
-      <p class="joke-card__text">${joke.text}</p>
-    `;
-    grid.appendChild(card);
-  });
-}
-
 function init() {
   initShared();
+  if (document.body.classList.contains("birthday-gate--active")) return;
+
+  const balloonField = document.getElementById("wish-balloon-field");
+  const canvas = document.getElementById("confetti-canvas");
+  const balloonConfig = SITE_CONFIG.wishBalloons;
+
+  if (balloonField && balloonConfig?.enabled !== false) {
+    createInteractiveWishBalloons(balloonField, {
+      phrases: balloonConfig?.popPhrases,
+      canvas,
+    });
+  }
+
   renderPhdSection();
   renderWishes();
-  renderJokes();
   observeReveals(document.getElementById("wishes-grid"));
-  observeReveals(document.getElementById("jokes-grid"));
+
+  if (canvas) {
+    window.addEventListener("resize", () => resizeCanvas(canvas));
+    resizeCanvas(canvas);
+  }
 }
 
 init();

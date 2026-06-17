@@ -10,19 +10,20 @@ function renderTreats() {
   if (!grid) return;
 
   SITE_CONFIG.funSurprises.forEach((item, i) => {
+    const type = item.type || "gift";
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "treat reveal";
+    btn.className = `treat treat--${type} reveal`;
     btn.style.setProperty("--stagger", i);
     btn.setAttribute("aria-label", item.label);
     btn.innerHTML = `
-      ${TREAT_SVG[item.type] || TREAT_SVG.gift}
+      <span class="treat__badge" aria-hidden="true"></span>
+      ${TREAT_SVG[type] || TREAT_SVG.gift}
       <span class="treat__label">${item.label}</span>
     `;
     btn.addEventListener("click", () => {
       btn.classList.add("treat--pop");
-      showToast(item.message);
-      fireConfetti(document.getElementById("confetti-canvas"), 60);
+      openTreatReveal(item, document.getElementById("confetti-canvas"), btn);
       setTimeout(() => btn.classList.remove("treat--pop"), 500);
     });
     grid.appendChild(btn);
@@ -33,6 +34,7 @@ function renderTreats() {
 
 function init() {
   initShared();
+  if (document.body.classList.contains("birthday-gate--active")) return;
   createBalloons(document.getElementById("balloon-field"), 6);
   renderTreats();
   window.addEventListener("resize", () => resizeCanvas(document.getElementById("confetti-canvas")));

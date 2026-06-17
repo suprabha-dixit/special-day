@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Birthday wishes — cheers, jokes, and PhD humour">
-  <title>Wishes — Auguri</title>
+  <meta name="description" content="Birthday wishes — cheers and academic respect">
+  <title>Birthday Wishes</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -13,17 +14,19 @@
 </head>
 <body data-page="wishes">
   <div class="texture" aria-hidden="true"></div>
+  <div class="wish-balloon-field" id="wish-balloon-field" aria-hidden="true"></div>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
-  <header class="page-hero">
+  <header class="page-hero page-hero--wishes">
     <div class="laurel-divider" aria-hidden="true">
       <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 12 Q50 0 100 12 T200 12 T300 12 T400 12" fill="none" stroke="currentColor" stroke-width="1"/>
         <circle cx="200" cy="12" r="4" fill="currentColor"/>
       </svg>
     </div>
-    <p class="page-hero__eyebrow">Tanti Auguri</p>
+    <p class="page-hero__eyebrow">Birthday cheers</p>
     <h1 class="page-hero__title">Wishes for <span data-recipient>Nome</span></h1>
-    <p class="page-hero__subtitle">Birthday cheers, academic respect, and jokes Reviewer #2 would hate.</p>
+    <p class="page-hero__subtitle">Birthday cheers and academic respect.</p>
   </header>
 
   <main>
@@ -51,12 +54,6 @@
       <h2 id="wishes-heading" class="section-title reveal">Birthday cheers</h2>
       <div class="wishes-grid" id="wishes-grid"></div>
     </section>
-
-    <section class="jokes-section" aria-labelledby="jokes-heading">
-      <h2 id="jokes-heading" class="section-title reveal">PhD survivor humour</h2>
-      <p class="section-intro reveal">Because laughter is the best defence against Reviewer #2.</p>
-      <div class="jokes-grid" id="jokes-grid"></div>
-    </section>
   </main>
 
   <div id="site-footer"></div>
@@ -64,6 +61,7 @@
   <script src="js/config.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/gate.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/wishes.js"></script>
 </body>
