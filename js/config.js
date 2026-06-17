@@ -45,7 +45,7 @@ const SITE_CONFIG = {
   giftReveal: {
     buttonLabel: "Open the gift",
     hiddenMessage:
-      "Happy birthday! May this year bring strong coffee, fewer revision requests, and at least one plot that makes sense. Tanti Auguri!",
+      "Happy Birthday! 🎂✨ May this year bring you success in every step, happiness in every moment, and the strength to achieve all your dreams. I'm grateful that our paths crossed and that I got the chance to know you. As time moves forward, I hope life gives us the opportunity to build something meaningful together. I also cherish the hope that our paths may continue together and that one day you might become not just a part of my story, but my life partner 💍. Wishing you a beautiful year filled with joy, success, and countless reasons to smile.Tanti Auguri! 🌹❤️",
     closeLabel: "Continue celebrating",
     fireworkSound: "assets/audio/fireworks.mp3",
     cheerSound: "assets/audio/cheer.mp3",
@@ -175,53 +175,107 @@ const SITE_CONFIG = {
     {
       src: "assets/gallery/05.jpeg",
       alt: "",
+	  caption:"Sweet Family",
+	  phrase: "Where love, values, and dreams came together."
     },
     {
       src: "assets/gallery/06.jpeg",
       alt: "Raising glasses together",
       caption: "Cheers",
-     // phrase: "To surviving another academic year.",
+      phrase: "color of the World is based on color of ur mind",
     },
 	{
       src: "assets/gallery/07.jpeg",
       alt: "",
+	  phrase:"Throwing petals, creating memories."
     },
 	    {
       src: "assets/gallery/08.jpeg",
       alt: "",
+	  phrase:"Stoic it is....."
     },
 	    {
       src: "assets/gallery/09.jpeg",
       alt: "",
+	  phrase:"Smile ... Sprakle ... Shine !!"
     },
 	    {
       src: "assets/gallery/10.jpeg",
       alt: "",
+	  phrase:"...Fairy lights on winter nights"
     },
-	    {
-      src: "assets/gallery/11.jpeg",
+	{
+      src: "assets/gallery/23.jpeg",
       alt: "",
+	  phrase:"Can't get enough....."
     },
-	    {
+	{
       src: "assets/gallery/12.jpeg",
       alt: "",
+	  phrase:"Glowing lights ..n winter nights"
     },
 	 {
       src: "assets/gallery/13.jpeg",
       alt: "",
+	  phrase: "So many books, so many people, but little time..."
     },
 	 {
       src: "assets/gallery/14.jpeg",
       alt: "",
+	  phrase:"Some lights brighten homes, some brighten hearts."
     },
 	 {
       src: "assets/gallery/15.jpeg",
       alt: "",
+	  phrase:"A smile worth a thousand words"
     },
 	 {
       src: "assets/gallery/16.jpeg",
       alt: "",
+	  phrase:"When u live from the Inside out,it doesn't matter how Chaotic the world around u is,... You're at peace wid urself &walk wid ur own peace"
     },
+	{
+      src: "assets/gallery/18.jpeg",
+      alt: "",
+	  caption:"☕",
+	  phrase:"A room full of wonder, a heart full of words"
+    },
+	{
+      src: "assets/gallery/21.jpeg",
+      alt: "",
+	  phrase:"We don't remember days...we remember moments ."
+    },
+	{
+      src: "assets/gallery/19.jpeg",
+      alt: "",
+	  phrase:"When a girl wears saree it doesn't mean that she is grown up... it's about charm that appears,on wearing it..."
+    },
+	{
+      src: "assets/gallery/20.jpeg",
+      alt: "",
+	  phrase:"Each day is an opportunity to create a beautiful change in your life"
+    },
+	{
+      src: "assets/gallery/17.jpeg",
+      alt: "",
+	  phrase:"A Girl is like a tea bag,u will never know her strength until u put her in hot water"
+    },
+	{
+      src: "assets/gallery/22.jpeg",
+      alt: "",
+	  phrase:"No one look's back unless there is a good view"
+    },
+	{
+      src: "assets/gallery/11.jpeg",
+      alt: "",
+	  phrase:"Get out of your own way..."
+    },
+	{
+      src: "assets/gallery/24.jpeg",
+      alt: "",
+	  phrase:"Elegance never go out of style"
+    },
+
   ],
 
   nav: [
