@@ -4,7 +4,7 @@ const SITE_CONFIG = {
   timezone: "Europe/Rome", // Turin, Italy
 
   birthdayGate: {
-    enabled: false, // set false to preview full site before June 18
+    enabled: true, // set false to preview full site before June 18
     title: "Buon Compleanno",
     subtitle: "Something special is on its way…",
     unlockLine: "Tanti Auguri! The celebration is ready.",
@@ -20,7 +20,7 @@ const SITE_CONFIG = {
 
   earlyCelebration: {
     enabled: true,
-    birthdayISO: "2026-06-17T00:00:00+05:30",
+    birthdayISO: "2026-06-18T00:00:00+05:30",
     gateBanner: "From India with love — we've already started celebrating you!",
     gateHint: "Your Turin birthday arrives soon. The countdown is for Italy time.",
     quotes: [
@@ -180,7 +180,7 @@ const SITE_CONFIG = {
       src: "assets/gallery/06.jpeg",
       alt: "Raising glasses together",
       caption: "Cheers",
-      phrase: "To surviving another academic year.",
+     // phrase: "To surviving another academic year.",
     },
 	{
       src: "assets/gallery/07.jpeg",
