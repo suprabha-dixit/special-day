@@ -100,12 +100,12 @@ const SITE_CONFIG = {
       accent: "Sweet!",
       message: "Something special is wrapped inside — verify to unwrap your surprise.",
       voucher: {
-        code: "XXXX-XXXXXX-XXXX",
+        code: "RWK3-NH6QKT-AVHQ",
         verifyDelayMs: 1800,
         intro: "Verify to unwrap your birthday Sweet Surprise.",
         authLabel: "Enter your mobile number",
         authPlaceholder: "......",
-        authValue: "7756016965",
+        authValue: "8378994776",
         authError: "Reviewer #2 rejected that — minor revision required. Try again!",
         verifyButton: "Verify & unlock",
         verifyingText: "Running peer review on your digits… hold tight!",
@@ -142,9 +142,8 @@ const SITE_CONFIG = {
           message: "Here's to everything ahead — success, joy, and a future as bright as you are.",
         },
         items: [
-          //{ image: "assets/gallery/01.jpg", alt: "Celebration night" },
-          { image: "assets/gallery/03.jpg", alt: "Smiling portrait" },
-          { image: "assets/gallery/06.jpg", alt: "Cheers" },
+          { image: "assets/gallery/101.jpeg", alt: "" },
+          { image: "assets/gallery/102.jpeg", alt: "" },
         ],
       },
     },
@@ -153,35 +152,75 @@ const SITE_CONFIG = {
   gallery: [
     {
       src: "assets/gallery/01.jpg",
-      alt: "Celebration dinner with friends",
-      caption: "Celebration night",
-      phrase: "The night nobody talked about p-values. Miracle.",
+      //alt: "Celebration dinner with friends",
+     // caption: "Celebration night",
+      phrase: "Once upon a time, a little princess arrived 👑",
     },
     {
       src: "assets/gallery/02.jpeg",
       alt: "Late night research session",
-      caption: "Thesis era",
+      //caption: "Thesis era",
     },
     {
       src: "assets/gallery/03.jpeg",
-      alt: "Smiling portrait",
-      phrase: "Proof of life outside the lab. Rare specimen.",
+      //alt: "Smiling portrait",
+      //phrase: "Proof of life outside the lab. Rare specimen.",
     },
     {
       src: "assets/gallery/04.jpeg",
-      alt: "Travel snapshot",
-      caption: "Adventures",
-      phrase: "Fieldwork or vacation? Yes.",
+      //alt: "Travel snapshot",
+      //caption: "Adventures",
+      //phrase: "Fieldwork or vacation? Yes.",
     },
     {
-      src: "assets/gallery/05.jpg",
-      alt: "Café study session",
+      src: "assets/gallery/05.jpeg",
+      alt: "",
     },
     {
-      src: "assets/gallery/06.jpg",
+      src: "assets/gallery/06.jpeg",
       alt: "Raising glasses together",
       caption: "Cheers",
       phrase: "To surviving another academic year.",
+    },
+	{
+      src: "assets/gallery/07.jpeg",
+      alt: "",
+    },
+	    {
+      src: "assets/gallery/08.jpeg",
+      alt: "",
+    },
+	    {
+      src: "assets/gallery/09.jpeg",
+      alt: "",
+    },
+	    {
+      src: "assets/gallery/10.jpeg",
+      alt: "",
+    },
+	    {
+      src: "assets/gallery/11.jpeg",
+      alt: "",
+    },
+	    {
+      src: "assets/gallery/12.jpeg",
+      alt: "",
+    },
+	 {
+      src: "assets/gallery/13.jpeg",
+      alt: "",
+    },
+	 {
+      src: "assets/gallery/14.jpeg",
+      alt: "",
+    },
+	 {
+      src: "assets/gallery/15.jpeg",
+      alt: "",
+    },
+	 {
+      src: "assets/gallery/16.jpeg",
+      alt: "",
     },
   ],
 
