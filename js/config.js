@@ -158,17 +158,17 @@ const SITE_CONFIG = {
       phrase: "The night nobody talked about p-values. Miracle.",
     },
     {
-      src: "assets/gallery/02.jpg",
+      src: "assets/gallery/02.jpeg",
       alt: "Late night research session",
       caption: "Thesis era",
     },
     {
-      src: "assets/gallery/03.jpg",
+      src: "assets/gallery/03.jpeg",
       alt: "Smiling portrait",
       phrase: "Proof of life outside the lab. Rare specimen.",
     },
     {
-      src: "assets/gallery/04.jpg",
+      src: "assets/gallery/04.jpeg",
       alt: "Travel snapshot",
       caption: "Adventures",
       phrase: "Fieldwork or vacation? Yes.",
