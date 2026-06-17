@@ -134,7 +134,6 @@ function injectFooter() {
       </svg>
     </div>
     <p class="footer__text">Celebrating ${SITE_CONFIG.recipientName}.</p>
-    <p class="footer__hint">Share this link when it goes live — spread the celebration.</p>
   `;
 
   const placeholder = document.getElementById("site-footer");
